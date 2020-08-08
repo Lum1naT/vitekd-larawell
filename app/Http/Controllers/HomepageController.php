@@ -19,7 +19,7 @@ class HomepageController extends Controller
 
 
       return view('homepage', [
-        // 'products' => $products,
+        'products' => $products,
       ]);
 
 
