@@ -16,7 +16,6 @@ class HomepageController extends Controller
       $cookieController = new CookieController();
       $productController = new ProductController();
 
-      $products = Product::all();
       
 
       return view('homepage', [
