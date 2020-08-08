@@ -16,10 +16,10 @@ class HomepageController extends Controller
       $cookieController = new CookieController();
       $productController = new ProductController();
 
-      
+
 
       return view('homepage', [
-        'products' => $products,
+        // 'products' => $products,
       ]);
 
 
