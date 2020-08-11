@@ -17,7 +17,7 @@ class ProductController extends Controller
       'product' => $product,
     ]);
   }
-  
+
     public function create(Request $request)
     {
 
@@ -32,7 +32,12 @@ class ProductController extends Controller
       $product->name = $request->name;
       $product->description = $request->description;
       $product->price = $price;
-      $product->stock = $request->stock;
+
+      if(!(empty($product->stock))){
+        $product->stock = $request->stock;
+      }
+
+      $product->product_code = $request->product_code;
       $product->save();
 
       return redirect('/');
