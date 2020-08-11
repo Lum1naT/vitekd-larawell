@@ -12,14 +12,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*
+* Patterns
+*/
+
+Route::pattern('id', '[0-9]+');
+
+/* * * * */
+
+
+/*
+* Routes
+*/
+
 Route::get('/', 'HomepageController@index');
 
 Route::post('/create', 'ProductController@create');
-
-Route::pattern('id', '[0-9]+');
 
 Route::get('product/{id}', 'ProductController@detail');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* * * * */
