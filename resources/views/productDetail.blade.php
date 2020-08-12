@@ -4,12 +4,7 @@
 
 @section('content')
 
-
-<h2> Product: {{ $product->name }}</h2>
-<h3> Cost: {{ $product->price }} <br>
-      Stock: {{ $product->stock }}
-
-</h3>
+<h1>Product Detail</h1>
 
 <form action="/editProduct" method="post">
   <input type="text" name="name" placeholder="Name" value="{{ $product->name }}"><br>
