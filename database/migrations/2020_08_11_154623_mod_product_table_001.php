@@ -14,7 +14,7 @@ class ModProductTable001 extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('stock')->default(0)->unsigned()->change();
+            $table->integer('stock')->default(0)->unsigned()->change();
         });
     }
 

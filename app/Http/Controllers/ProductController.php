@@ -40,7 +40,6 @@ class ProductController extends Controller
 
     $validatedData = $validator->valid();
 
-
     //Price input check
     if(empty($validatedData['decimal'])){
       $price = $validatedData['base'].'.00';
