@@ -80,7 +80,7 @@ class ProductController extends Controller
 
     if ($validator->fails()) {
       return redirect('/error')
-            ->withErrors($validator, 'editProduct');
+            ->withErrors($validator, 'productEdit');
     }
 
     $validatedData = $validator->valid();
