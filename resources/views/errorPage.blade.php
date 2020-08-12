@@ -7,9 +7,13 @@
 
     <div class="alert alert-danger">
         <ul>
-            @foreach ($errors->productCreate->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+          @foreach ($errors->productCreate->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+          @foreach ($errors->productEdit->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+
         </ul>
     </div>
 

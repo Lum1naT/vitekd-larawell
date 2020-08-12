@@ -15,9 +15,16 @@ class ProductController extends Controller
 
     $product = Product::FindOrFail($id);
 
+    $price = explode(".",$product->price);
+
+
     return view('productDetail', [
       'product' => $product,
+      'price_base' => $price[0],
+      'price_decimal' => $price[1],
     ]);
+
+
   }
 
     public function create(Request $request)
@@ -65,7 +72,14 @@ class ProductController extends Controller
       return redirect('/');
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request){
+
+      //get propduct id the request is coming from
+      $url = $request->path();
+      $explodedUri = explode("/", $_SERVER['HTTP_REFERER']);
+      $id = $explodedUri[4];
+
+      //
 
       $product = Product::FindOrFail($id);
 
@@ -75,7 +89,7 @@ class ProductController extends Controller
         'base' => ['required', 'numeric'],
         'decimal' => ['numeric', ],
         'stock' => ['numeric', ],
-        'product_code' => ['required', 'unique:products', 'max:255'],
+        'product_code' => ['required', 'unique:products,product_code,'.$id , 'max:255',],
     ]);
 
     if ($validator->fails()) {
@@ -101,6 +115,7 @@ class ProductController extends Controller
       if(!(empty($validatedData['stock']))){
         $product->stock = $validatedData['stock'];
       }
+
 
       $product->product_code = $validatedData['product_code'];
       $product->save();

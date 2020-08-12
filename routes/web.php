@@ -30,7 +30,9 @@ Route::get('/', 'HomepageController@index');
 
 Route::get('/error', 'HomepageController@error');
 
-Route::post('/create', 'ProductController@create');
+Route::post('/createProduct', 'ProductController@create');
+Route::post('/editProduct', 'ProductController@edit');
+
 
 Route::get('product/{id}', 'ProductController@detail');
 
