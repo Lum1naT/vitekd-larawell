@@ -16,6 +16,9 @@ class ProductController extends Controller
     $product = Product::FindOrFail($id);
 
     $price = explode(".",$product->price);
+    if(sizeof($price) == 1){
+      array_push($price, "00");
+    }
 
 
     return view('productDetail', [
@@ -23,7 +26,7 @@ class ProductController extends Controller
       'price_base' => $price[0],
       'price_decimal' => $price[1],
     ]);
-
+    
 
   }
 
