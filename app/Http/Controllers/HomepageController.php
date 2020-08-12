@@ -24,4 +24,10 @@ class HomepageController extends Controller
 
 
     }
+
+    public function error(Request $request){
+
+      return view('errorPage');
+
+    }
 }

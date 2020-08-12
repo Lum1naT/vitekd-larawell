@@ -28,6 +28,8 @@ Route::pattern('id', '[0-9]+');
 
 Route::get('/', 'HomepageController@index');
 
+Route::get('/error', 'HomepageController@error');
+
 Route::post('/create', 'ProductController@create');
 
 Route::get('product/{id}', 'ProductController@detail');
