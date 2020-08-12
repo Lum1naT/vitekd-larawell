@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     if ($validator->fails()) {
       return redirect('/error')
-            ->withErrors($validator);
+            ->withErrors($validator, 'productCreate');
     }
 
     $validatedData = $validator->valid();
