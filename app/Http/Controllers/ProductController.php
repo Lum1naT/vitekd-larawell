@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Product;
 use App\Category;
+use App\Tag;
 
 class ProductController extends Controller
 {
@@ -76,8 +77,9 @@ class ProductController extends Controller
 
 
 
-                  $category = Category::find([1, 3]);
-                  $product->categories()->attach($category);
+      //use AFTER save()
+      $category = Tag::find([1, 3]);
+      $product->tags()->attach($category);
 
       return redirect('/');
     }
@@ -140,9 +142,37 @@ class ProductController extends Controller
 
     }
 
+    public function addCategory(Product $product, array $categoryId){
 
+      $category = Category::FindOrFail($categoryId);
 
+      $product->categories()->attach($category);
 
+    }
+
+    public function removeCategory(Product $product, array $categoryId){
+
+      $category = Category::FindOrFail($categoryId);
+
+      $product->categories()->detach($category);
+
+    }
+
+    public function addTag(Product $product, array $tagId){
+
+      $tag = Tag::FindOrFail($tagId);
+
+      $procuct->tags()->attach($tag);
+      
+    }
+
+    public function removeTag(Product $product, array $tagId){
+
+      $tag = Tag::FindOrFail($tagId);
+
+      $procuct->tags()->detach($tag);
+
+    }
 
     public function getAllProductsInStock(){
       $productsInStock = Product::where('stock', '>', 0)->get();

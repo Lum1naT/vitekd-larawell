@@ -8,8 +8,15 @@ use App\Category;
 class Product extends Model
 {
 
-  public function categories(){
-    return $this->belongsToMany(Category::class);  
-  }
+  use SoftDeletes;
+
+    public function categories(){
+      return $this->belongsToMany(Category::class);
+    }
+
+
+      public function tags(){
+        return $this->belongsToMany(Tag::class);
+      }
 
 }

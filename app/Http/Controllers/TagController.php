@@ -10,7 +10,7 @@ class TagController extends Controller
 {
   public function create(Request $request){
 
-    $name = 'Dummy Tag';
+    $name = 'Hard';
 
     $tag = new Tag;
 

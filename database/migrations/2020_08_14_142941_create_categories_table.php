@@ -17,7 +17,11 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->string('is_child_of')->nullable();
             $table->timestamps();
+            //
+            $table->softDeletes();
+
         });
     }
 
