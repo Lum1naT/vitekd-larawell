@@ -46,10 +46,12 @@ class CategoryController extends Controller
 
     $products = $queryResult->toArray();
 
-    $array = json_decode(json_encode($products), true);
+    //from StdClass to Array
+    $productsArray = json_decode(json_encode($products), true);
 
     $result = [];
-    foreach ($array as $key => $value) {
+
+    foreach ($productsArray as $key => $value) {
       foreach ($value as $key => $productId) {
         $product = Product::find($productId);
         array_push($result, $product);
@@ -58,6 +60,14 @@ class CategoryController extends Controller
 
     return $result;
 
+
+
+  }
+
+  static function getProductsCount(Category $category){
+    $queryResult = DB::table('category_product')->where('category_id', $category->id)->count();
+
+    return $queryResult;
 
 
   }

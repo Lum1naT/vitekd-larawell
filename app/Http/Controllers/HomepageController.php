@@ -25,7 +25,7 @@ class HomepageController extends Controller
 
       $category = Category::FindOrFail(3);
 
-      $categoryController::getCategoryProducts($category);
+      $categoryController::getProductsCount($category);
 
 
       return view('homepage', [
@@ -33,7 +33,7 @@ class HomepageController extends Controller
         'categories' => $categories,
       ]);
 
-      
+
     }
 
     public function error(Request $request){
