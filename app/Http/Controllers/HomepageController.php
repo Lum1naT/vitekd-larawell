@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Product;
+use App\Category;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CookieController;
 
@@ -17,9 +19,11 @@ class HomepageController extends Controller
       $productController = new ProductController();
 
       $products = Product::all();
+      $categories = Category::all();
 
       return view('homepage', [
         'products' => $products,
+        'categories' => $categories,
       ]);
 
 

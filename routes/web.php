@@ -30,6 +30,9 @@ Route::get('/', 'HomepageController@index');
 
 Route::get('/error', 'HomepageController@error');
 
+Route::get('/functest', 'TagController@create');
+
+
 Route::post('/createProduct', 'ProductController@create');
 Route::post('/editProduct', 'ProductController@edit');
 

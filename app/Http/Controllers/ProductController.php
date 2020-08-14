@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -58,11 +59,11 @@ class ProductController extends Controller
     }
 
 
-
       $product = new Product();
       $product->name = $validatedData['name'];
       $product->description = $validatedData['description'];
       $product->price = $price;
+
 
       //Stock input check
       if(!(empty($validatedData['stock']))){
@@ -70,7 +71,13 @@ class ProductController extends Controller
       }
 
       $product->product_code = $validatedData['product_code'];
+
       $product->save();
+
+
+
+                  $category = Category::find([1, 3]);
+                  $product->categories()->attach($category);
 
       return redirect('/');
     }
@@ -129,7 +136,7 @@ class ProductController extends Controller
 
     public function delete(Request $request){
 
-      
+
 
     }
 

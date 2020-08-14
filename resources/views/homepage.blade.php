@@ -16,6 +16,13 @@
 
   </form>
 
+  <h2>Categories:</h2>
+  <ul>
+    @foreach($categories as $category)
+    <li> <b> {{ $category->name }} </b>
+    </li>
+    @endforeach
+
   <h2>Products:</h2>
   <ul>
     @foreach($products as $product)
