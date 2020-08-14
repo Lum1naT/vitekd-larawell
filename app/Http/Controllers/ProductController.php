@@ -26,7 +26,7 @@ class ProductController extends Controller
       'price_base' => $price[0],
       'price_decimal' => $price[1],
     ]);
-    
+
 
   }
 
@@ -124,6 +124,12 @@ class ProductController extends Controller
       $product->save();
 
       return redirect('/');
+
+    }
+
+    public function delete(Request $request){
+
+      
 
     }
 
