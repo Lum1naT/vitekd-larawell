@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Category;
+use App\Product;
 
 class CategoryController extends Controller
 {
@@ -37,6 +40,26 @@ class CategoryController extends Controller
     // $category = Cagetory::FindOrFail(1);
   }
 
-  
+  static function getCategoryProducts(Category $category){
+
+    $queryResult = DB::table('category_product')->where('category_id', $category->id)->get('product_id');
+
+    $products = $queryResult->toArray();
+
+    $array = json_decode(json_encode($products), true);
+
+    $result = [];
+    foreach ($array as $key => $value) {
+      foreach ($value as $key => $productId) {
+        $product = Product::find($productId);
+        array_push($result, $product);
+      }
+    }
+
+    return $result;
+
+
+
+  }
 
 }

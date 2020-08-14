@@ -13,6 +13,39 @@ use App\Tag;
 class ProductController extends Controller
 {
 
+
+      static function addCategory(Product $product, array $categoryId){
+
+        $category = Category::FindOrFail($categoryId);
+
+        $product->categories()->attach($category);
+
+      }
+
+      static function removeCategory(Product $product, array $categoryId){
+
+        $category = Category::FindOrFail($categoryId);
+
+        $product->categories()->detach($category);
+
+      }
+
+      static function addTag(Product $product, array $tagId){
+
+        $tag = Tag::FindOrFail($tagId);
+
+        $product->tags()->attach($tag);
+
+      }
+
+      static function removeTag(Product $product, array $tagId){
+
+        $tag = Tag::FindOrFail($tagId);
+
+        $product->tags()->detach($tag);
+
+      }
+
   public function detail($id){
 
     $product = Product::FindOrFail($id);
@@ -78,8 +111,8 @@ class ProductController extends Controller
       $tagsArray = [1,3];
       $categoriesArray = [3,5];
 
-      addTag($product, $tagsArray);
-      addCategory($product, $categoriesArray);
+      ProductController::addTag($product, $tagsArray);
+      ProductController::addCategory($product, $categoriesArray);
 
 
       $product->save();
@@ -145,37 +178,6 @@ class ProductController extends Controller
 
     }
 
-    public function addCategory(Product $product, array $categoryId){
-
-      $category = Category::FindOrFail($categoryId);
-
-      $product->categories()->attach($category);
-
-    }
-
-    public function removeCategory(Product $product, array $categoryId){
-
-      $category = Category::FindOrFail($categoryId);
-
-      $product->categories()->detach($category);
-
-    }
-
-    public function addTag(Product $product, array $tagId){
-
-      $tag = Tag::FindOrFail($tagId);
-
-      $procuct->tags()->attach($tag);
-
-    }
-
-    public function removeTag(Product $product, array $tagId){
-
-      $tag = Tag::FindOrFail($tagId);
-
-      $procuct->tags()->detach($tag);
-
-    }
 
     public function getAllProductsInStock(){
       $productsInStock = Product::where('stock', '>', 0)->get();
