@@ -75,18 +75,21 @@ class ProductController extends Controller
 
       $product->save();
 
+      $tagsArray = [1,3];
+      $categoriesArray = [3,5];
+
+      addTag($product, $tagsArray);
+      addCategory($product, $categoriesArray);
 
 
-      //use AFTER save()
-      $category = Tag::find([1, 3]);
-      $product->tags()->attach($category);
+      $product->save();
 
       return redirect('/');
     }
 
     public function edit(Request $request){
 
-      //get propduct id the request is coming from
+      //get id of a product the request is coming from
       $url = $request->path();
       $explodedUri = explode("/", $_SERVER['HTTP_REFERER']);
       $id = $explodedUri[4];
@@ -163,7 +166,7 @@ class ProductController extends Controller
       $tag = Tag::FindOrFail($tagId);
 
       $procuct->tags()->attach($tag);
-      
+
     }
 
     public function removeTag(Product $product, array $tagId){
