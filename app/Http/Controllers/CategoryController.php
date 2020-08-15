@@ -40,9 +40,86 @@ class CategoryController extends Controller
     // $category = Cagetory::FindOrFail(1);
   }
 
+  static function isParentCategory(Category $category){
+
+    $hasChildren = DB::table('categories')
+                            ->where('is_child_of', $category->id)
+                            ->count();
+    if($hasChildren != 0){
+      return true;
+    }
+
+    return false;
+
+  }
+
+  //returns an array with all the children of a category
+  static function getChildrenOfCategory(array $categories, array $input = []){
+
+    $childFound = false;
+
+    foreach ($categories as $key => $category) {
+
+      echo "checking category id: ".$category->id."<br>";
+
+
+
+
+                              if (CategoryController::isParentCategory($category)) {
+                                $childFound = true;
+                                //returns id of children categories
+                                $children = DB::table('categories')
+                                                        ->where('is_child_of', $category->id)
+                                                        ->get('id');
+
+                                $childrenStd = $children->toArray();
+
+                                //from StdClass to Array
+                                $childrenArray = json_decode(json_encode($childrenStd), true);
+
+
+                                $childrenResult = $input;
+                                $categoriesResult = [];
+
+
+                                foreach ($childrenArray as $key => $value) {
+                                  foreach ($value as $key => $categoryId) {
+                                    array_push($childrenResult, $categoryId);
+                                    $category = Category::find($categoryId);
+                                    array_push($categoriesResult, $category);
+
+                                  }
+                                }
+
+                                CategoryController::getChildrenOfCategory($categoriesResult, $childrenResult);
+
+
+    } else {
+      $childrenResult = $input;
+
+    }
+
+
+
+  }   //endforeach
+
+
+
+  if (!$childFound) {
+    dump($childrenResult);
+  }
+
+
+}
+
   static function getCategoryProducts(Category $category){
 
-    $queryResult = DB::table('category_product')->where('category_id', $category->id)->get('product_id');
+
+
+
+    $queryResult = DB::table('category_product')
+                            ->where('category_id', $category->id)
+                            ->get('product_id');
 
     $products = $queryResult->toArray();
 
@@ -64,7 +141,10 @@ class CategoryController extends Controller
 
   }
 
-  static function getProductsCount(Category $category){
+  static function getCategoryProductsCount(Category $category){
+
+
+
     $queryResult = DB::table('category_product')->where('category_id', $category->id)->count();
 
     return $queryResult;

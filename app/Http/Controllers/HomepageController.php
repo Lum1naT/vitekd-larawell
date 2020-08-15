@@ -23,9 +23,12 @@ class HomepageController extends Controller
       $products = Product::all();
       $categories = Category::all();
 
-      $category = Category::FindOrFail(3);
+      $category = Category::FindOrFail(1);
 
-      $categoryController::getProductsCount($category);
+      $array = [];
+      array_push($array, $category);
+
+      $categoryController::getChildrenOfCategory($array);
 
 
       return view('homepage', [
