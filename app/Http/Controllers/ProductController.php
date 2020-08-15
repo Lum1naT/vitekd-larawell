@@ -174,7 +174,18 @@ class ProductController extends Controller
 
     public function delete(Request $request){
 
+      $id = 1;
+      $product = Product::FindOrFail($id);
 
+      $product->delete();
+
+    }
+
+    public function restore(Request $request){
+      $id = 1;
+      $product = Product::onlyTrashed()
+                      ->where('id', $id)
+                      ->restore();
 
     }
 

@@ -25,7 +25,17 @@ class TagController extends Controller
   }
 
   public function delete(Request $request){
+    $id = 1;
+    $tag = Tag::FindOrFail($id);
 
+    $tag->delete();
+  }
+
+  public function restore(Request $request){
+    $id = 1;
+    $tag = Tag::onlyTrashed()
+                    ->where('id', $id)
+                    ->restore();
   }
 
 

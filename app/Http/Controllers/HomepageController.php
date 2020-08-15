@@ -28,7 +28,7 @@ class HomepageController extends Controller
       $array = [];
       array_push($array, $category);
 
-      $categoryController::getChildrenOfCategory($array);
+      $categoryController::getAllCategoryChildrenId($category);
 
 
       return view('homepage', [

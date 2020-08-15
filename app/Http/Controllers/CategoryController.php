@@ -33,11 +33,24 @@ class CategoryController extends Controller
   }
 
   public function edit(Request $request){
-
+    $id = 1;
+    $category = Cagetory::FindOrFail($id);
+    
   }
 
   public function delete(Request $request){
-    // $category = Cagetory::FindOrFail(1);
+    $id = 1;
+    $category = Category::FindOrFail($id);
+
+    $category->delete();
+
+    }
+
+  public function restore(Request $request){
+    $id = 1;
+    $category = Category::onlyTrashed()
+                    ->where('id', $id)
+                    ->restore();
   }
 
   static function isParentCategory(Category $category){
@@ -50,6 +63,34 @@ class CategoryController extends Controller
     }
 
     return false;
+
+  }
+
+  //returns an array of child category id(s)
+  static function getAllCategoryChildrenId(Category $category){
+
+    $children = DB::table('categories')
+                            ->where('is_child_of', $category->id)
+                            ->get('id');
+
+
+
+    $childrenStd = $children->toArray();
+
+    //from StdClass to Array
+    $childrenArray = json_decode(json_encode($childrenStd), true);
+
+
+    $childrenResult = [];
+
+
+    foreach ($childrenArray as $key => $value) {
+      foreach ($value as $key => $categoryId) {
+        array_push($childrenResult, $categoryId);
+      }
+    }
+
+    return($childrenResult);
 
   }
 
