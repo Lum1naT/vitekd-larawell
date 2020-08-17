@@ -32,6 +32,8 @@ Route::get('/error', 'HomepageController@error');
 
 Route::get('/functest', 'CategoryController@restore');
 
+Route::get('/account', 'UserController@account')->middleware('auth');
+
 
 Route::post('/createProduct', 'ProductController@create');
 Route::post('/editProduct', 'ProductController@edit');
