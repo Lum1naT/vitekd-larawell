@@ -5,7 +5,7 @@
 @section('content')
 
   <h2>Create a product: </h2>
-  <form action="/createProduct" method="post">
+  <form action="/editAccount" method="post">
     <input type="text" name="name" placeholder="Name"><br>
     <input type="text" name="description" placeholder="Description"><br>
     <input type="text" name="product_code" placeholder="Product Code" required><br>
