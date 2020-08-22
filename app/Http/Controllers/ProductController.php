@@ -14,6 +14,13 @@ class ProductController extends Controller
 {
 
 
+      public function overview(Request $request){
+
+        
+
+      }
+
+
       static function addCategory(Product $product, array $categoryId){
 
         $category = Category::FindOrFail($categoryId);

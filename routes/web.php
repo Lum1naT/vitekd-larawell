@@ -39,7 +39,10 @@ Route::post('/createProduct', 'ProductController@create');
 Route::post('/editProduct', 'ProductController@edit');
 
 
-Route::get('product/{id}', 'ProductController@detail');
+Route::get('/produkt/{id}', 'ProductController@detail');
+
+
+Route::get('/obchod', 'ProductController@detail');
 
 /* * * * */
 
