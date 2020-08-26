@@ -7,7 +7,7 @@
 @section('content')
 
   <h2>Create a product: </h2>
-  <form action="/createProduct" method="post">
+  <form action="{{ route('createProduct') }}" method="post">
     <input type="text" name="name" placeholder="Name"><br>
     <input type="text" name="description" placeholder="Description"><br>
     <input type="text" name="product_code" placeholder="Product Code" required><br>
@@ -28,7 +28,7 @@
   <h2>Products:</h2>
   <ul>
     @foreach($products as $product)
-    <li> <b><a href={{ url('product/'.$product->id) }}> {{ $product->name }} </a> </b> > {{ $product->description }}
+    <li> <b><a href={{ route('productDetail', ['id' => $product->id] ) }}> {{ $product->name }} </a> </b> > {{ $product->description }}
       <br> costs: {{ $product->price }}
       <br> stock: {{ $product->stock }}
     </li>

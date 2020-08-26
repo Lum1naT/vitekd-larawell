@@ -26,7 +26,7 @@ Route::pattern('id', '[0-9]+');
 * Routes
 */
 
-Route::get('/', 'HomepageController@index');
+Route::get('/', 'HomepageController@index')->name('index');
 
 Route::get('/error', 'HomepageController@error');
 
@@ -35,16 +35,24 @@ Route::get('/functest', 'CategoryController@restore');
 Route::get('/account', 'UserController@account')->middleware('auth');
 
 
-Route::post('/createProduct', 'ProductController@create');
-Route::post('/editProduct', 'ProductController@edit');
+Route::post('/createProduct', 'ProductController@create')->name('createProduct');
+Route::post('/editProduct', 'ProductController@edit')->name('editProduct');
 
 
-Route::get('/produkt/{id}', 'ProductController@detail');
+Route::get('/produkt/{id}', 'ProductController@detail')->name('productDetail');
 
 
-Route::get('/obchod', 'ProductController@detail');
+Route::get('/obchod', 'ProductController@overview')->name('shopOverview');
 
 /* * * * */
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

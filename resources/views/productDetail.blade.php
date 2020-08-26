@@ -6,7 +6,7 @@
 
 <h1>Product Detail</h1>
 
-<form action="/editProduct" method="post">
+<form action="{{ route('editProduct') }}" method="post">
   Name:<input type="text" name="name" placeholder="Name" value="{{ $product->name }}"><br>
   Description:<input type="text" name="description" placeholder="Description" value="{{ $product->description }}"><br>
   Product code:<input type="text" name="product_code" placeholder="Product Code" value="{{ $product->product_code }}" required><br>

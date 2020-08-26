@@ -16,7 +16,11 @@ class ProductController extends Controller
 
       public function overview(Request $request){
 
-        
+        $products = Product::get();
+
+        return view('shop.overview', [
+          'products' => $products,
+        ]);
 
       }
 
